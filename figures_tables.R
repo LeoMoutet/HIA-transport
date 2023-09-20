@@ -1,31 +1,10 @@
+# Fonctions
+source(here("Codes leo","Fonctions.R"))
+
 # Translate TEND in BAU
 scenario_name <- c(S1="S1", S2="S2", S3="S3", S4="S4",BAU = "BAU")
 
 ## Evolution of transport distances per scenario
-
-ademe_all_type_S1 %>%
-  group_by(year, type) %>%
-  summarise(mean_km = mean(km_pp_w),
-            mean_min = mean(min_pp_w)) %>%
-  ungroup %>%
-  filter (type == "Walk" | type == "Total cycle")%>%
-  ggplot(aes(x=year)) +
-  geom_line(aes(y = mean_km, color = "#0072B2", linetype = type),size = 1) +
-  geom_line(aes(y = mean_min, color = "firebrick", linetype = type),size = 1) +
-  theme_pubr() +
-  xlab("") +
-  ggtitle("S1")+
-  theme(legend.position = "bottom",
-        legend.title = element_blank(),
-        text = element_text(size = 15),
-        axis.text.x = element_text(hjust=1))+
-  scale_color_manual(values=c("#0072B2", "firebrick")) +
-  xlim (2021,2050)+
-  scale_y_continuous(name = "km/pp/week",
-                     sec.axis = sec_axis(~ . ,
-                                         name = "min/pp/week"))
-
-
 
 km_1 = ademe_all_type_S1 %>%
   group_by(year, type) %>%
@@ -39,7 +18,7 @@ km_1 = ademe_all_type_S1 %>%
   theme(legend.position = "bottom",
         legend.title = element_blank(),
         text = element_text(size = 15),
-        axis.text.x = element_text(hjust=1))+
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 12))+
   scale_linetype_manual(values=c("solid", "longdash", "longdash","solid"))+
   scale_color_manual(values=c("#0072B2","#E69F00", "#F0E442", "firebrick")) +
   xlim (2021,2050)+
@@ -57,7 +36,7 @@ km_2 = ademe_all_type_S2 %>%
   theme(legend.position = "bottom",
         legend.title = element_blank(),
         text = element_text(size = 15),
-        axis.text.x = element_text(hjust=1))+
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 12))+
   scale_linetype_manual(values=c("solid", "longdash", "longdash","solid"))+
   scale_color_manual(values=c("#0072B2","#E69F00", "#F0E442","firebrick")) +
   xlim (2021,2050)+
@@ -75,7 +54,7 @@ km_3 = ademe_all_type_S3 %>%
   theme(legend.position = "bottom",
         legend.title = element_blank(),
         text = element_text(size = 15),
-        axis.text.x = element_text(hjust=1))+
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 12))+
   scale_linetype_manual(values=c("solid", "longdash", "longdash","solid"))+
   scale_color_manual(values=c("#0072B2","#E69F00", "#F0E442","firebrick")) +
   xlim (2021,2050)+
@@ -93,7 +72,7 @@ km_4 = ademe_all_type_S4 %>%
   theme(legend.position = "bottom",
         legend.title = element_blank(),
         text = element_text(size = 15),
-        axis.text.x = element_text(hjust=1))+
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 12))+
   scale_linetype_manual(values=c("solid", "longdash", "longdash","solid"))+
   scale_color_manual(values=c("#0072B2","#E69F00", "#F0E442","firebrick")) +
   xlim (2021,2050)+
@@ -112,7 +91,7 @@ min_1 = ademe_all_type_S1 %>%
   theme(legend.position = "bottom",
         legend.title = element_blank(),
         text = element_text(size = 15),
-        axis.text.x = element_text(hjust=1))+
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 12))+
   scale_linetype_manual(values=c("solid", "longdash", "longdash","solid"))+
   scale_color_manual(values=c("#0072B2","#E69F00", "#F0E442", "firebrick")) +
   xlim (2021,2050)+
@@ -130,7 +109,7 @@ min_2 = ademe_all_type_S2 %>%
   theme(legend.position = "bottom",
         legend.title = element_blank(),
         text = element_text(size = 15),
-        axis.text.x = element_text(hjust=1))+
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 12))+
   scale_linetype_manual(values=c("solid", "longdash", "longdash","solid"))+
   scale_color_manual(values=c("#0072B2","#E69F00", "#F0E442","firebrick")) +
   xlim (2021,2050)+
@@ -148,7 +127,7 @@ min_3 = ademe_all_type_S3 %>%
   theme(legend.position = "bottom",
         legend.title = element_blank(),
         text = element_text(size = 15),
-        axis.text.x = element_text(hjust=1))+
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 12))+
   scale_linetype_manual(values=c("solid", "longdash", "longdash","solid"))+
   scale_color_manual(values=c("#0072B2","#E69F00", "#F0E442","firebrick")) +
   xlim (2021,2050)+
@@ -166,16 +145,17 @@ min_4 = ademe_all_type_S4 %>%
   theme(legend.position = "bottom",
         legend.title = element_blank(),
         text = element_text(size = 15),
-        axis.text.x = element_text(hjust=1))+
+        axis.text.x = element_text(angle = 45, hjust = 1, size = 12))+
   scale_linetype_manual(values=c("solid", "longdash", "longdash","solid"))+
   scale_color_manual(values=c("#0072B2","#E69F00", "#F0E442","firebrick")) +
   xlim (2021,2050)+
   ylim (c(0,100))
 
 plot_des_km_min = ggarrange(km_1,km_2, km_3, km_4,min_1,min_2, min_3, min_4, ncol = 4 , nrow = 2, common.legend = TRUE,
-                            legend = "bottom")
+                            legend = "bottom", align = "v")
 plot_des_km_min
 ggsave(here("figures","plot_des_km_min.png"), plot = plot_des_km_min , width = 10, height = 7)
+
 
 ################################################## Duration of active travel
 
@@ -226,7 +206,7 @@ ggsave(here("figures","min_WHO_supp.png"), plot = min_WHO_supp, width = 10, heig
 
 
 ###########################################################################
-# Premature death prevented 
+#   death prevented 
 
 p1= ademe_velo_marche_no_BAU_age %>%
   group_by(year, scenario) %>%
@@ -236,7 +216,7 @@ p1= ademe_velo_marche_no_BAU_age %>%
   ggplot(aes(x=year, y = sum_diff_death, fill = scenario, color = scenario)) +
   geom_line( size = 1.2) + 
   geom_ribbon(aes(ymin = sum_diff_death_low, ymax = sum_diff_death_high), alpha = 0.1 , linetype ="dotted" )+
-  scale_y_continuous(name = "Premature deaths prevented",labels = scales::comma)  +
+  scale_y_continuous(name = "Deaths prevented",labels = scales::comma)  +
   theme_pubr() +
   xlab("Year") +
   theme(legend.position = "bottom",
@@ -248,7 +228,7 @@ p1= ademe_velo_marche_no_BAU_age %>%
   geom_hline(aes(yintercept = 0), color= "black", linetype = "solid")+
   xlim (2021,2050)
 
-# Premature death prevented in thousand
+#   death prevented in thousand
 ademe_velo_marche_no_BAU_age$diff_death_mil <- ademe_velo_marche_no_BAU_age$diff_death /1000
 ademe_velo_marche_no_BAU_age$diff_death_low_mil <- ademe_velo_marche_no_BAU_age$diff_death_low /1000
 ademe_velo_marche_no_BAU_age$diff_death_high_mil <- ademe_velo_marche_no_BAU_age$diff_death_high /1000
@@ -265,7 +245,7 @@ p2= ademe_velo_marche_no_BAU_age %>%
   geom_errorbar(aes(ymin = sum_diff_death_low, ymax = sum_diff_death_high ), width = 0.5, position = position_dodge(0.8))+
   theme_pubr() +
   xlab("Age group") +
-  ylab("Premature deaths prevented (thousand)")+
+  ylab("Deaths prevented (thousand)")+
   theme(legend.position = "bottom",
         legend.title = element_blank(),
         text = element_text(size = 15),
@@ -396,7 +376,7 @@ plot_type2
 ggsave(here("figures","plot_type2.png"), plot = plot_type2, width=10, height=7)
 
 ###############################################################################
-# Premature deaths prevented 2035 / 2050
+#   deaths prevented 2035 / 2050
 d1.4 = ademe_velo_marche_no_BAU_age_2035 %>%
   group_by(scenario) %>%
   summarise(sum_diff_death = sum(diff_death),
@@ -405,7 +385,7 @@ d1.4 = ademe_velo_marche_no_BAU_age_2035 %>%
   ggplot(aes(fill = scenario , y=sum_diff_death, x=scenario)) + 
   geom_bar(position="stack", stat="identity") + 
   geom_errorbar(aes(ymin = sum_diff_death_low, ymax = sum_diff_death_high ), width = 0.1, position = position_dodge(0.8))+
-  scale_y_continuous(labels = scales::comma, name = "Premature deaths prevented", limits =  c(-4500,38000))  +
+  scale_y_continuous(labels = scales::comma, name = "Deaths prevented", limits =  c(-4500,38000))  +
   xlab("")+
   theme(axis.text = element_text(size = 15))+
   scale_fill_manual(values=c("#56B4E9", "#CC79A7", "#009E73", "#D55E00"), name = "") +
@@ -420,7 +400,7 @@ d1.5 = ademe_velo_marche_no_BAU_age_2050 %>%
   ggplot(aes(fill = scenario , y=sum_diff_death, x=scenario)) + 
   geom_bar(position="stack", stat="identity") + 
   geom_errorbar(aes(ymin = sum_diff_death_low, ymax = sum_diff_death_high ), width = 0.1, position = position_dodge(0.8))+
-  scale_y_continuous(labels = scales::comma, name = "Premature deaths prevented", limits =  c(-4500,38000))  +
+  scale_y_continuous(labels = scales::comma, name = "Deaths prevented", limits =  c(-4500,38000))  +
   xlab("")+
   theme(axis.text = element_text(size = 15))+
   scale_fill_manual(values=c("#56B4E9", "#CC79A7", "#009E73", "#D55E00"), name = "") +
@@ -520,20 +500,6 @@ pyr1 = distrib_marche_fr %>%
   xlim ("15-19","20-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74","75-79","80-84","85-89")+
   scale_y_continuous(limits=c(0,1.5))
 
-den_marche$age_grp <- age_grp(den_marche$age)
-pyr2 = den_marche %>%
-  group_by(age_grp)%>%
-  summarise(mean_rho = mean(rho))%>%
-  ungroup %>%
-  ggplot(aes(x=age_grp, y=mean_rho))+
-  geom_bar(position="stack", stat="identity", fill="#D55E00", alpha = 0.7)+
-  theme_pubr()+
-  theme(plot.title = element_text(size=15))+
-  ylab("Rho")+
-  xlab("Age group")+
-  xlim ("15-19","20-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74","75-79","80-84","85-89")+
-  scale_y_continuous(limits=c(0,1.5))
-
 
 pyr3 = distrib_velo_fr %>%
   ggplot(aes(x=age_grp, y=rho))+
@@ -545,7 +511,6 @@ pyr3 = distrib_velo_fr %>%
   xlim ("15-19","20-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74","75-79","80-84","85-89")+
   scale_y_continuous(limits=c(0,1.5))
 
-den_velo$age_grp <- age_grp(den_velo$age)
 pyr4 = den_velo %>%
   group_by(age_grp)%>%
   summarise(mean_rho = mean(rho))%>%
@@ -559,8 +524,8 @@ pyr4 = den_velo %>%
   xlim ("15-19","20-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74","75-79","80-84","85-89")+
   scale_y_continuous(limits=c(0,1.5))
 
-plot_pyr_walk = ggarrange(pyr1, pyr2,  ncol = 1 , nrow = 2, common.legend = TRUE, legend = "bottom",
-                          labels = c("FR walk","DEN walk"), hjust = -1)
+plot_pyr_walk = ggarrange(pyr1,  ncol = 1 , nrow = 1, common.legend = TRUE, legend = "bottom",
+                          labels = c("FR walk"), hjust = -1)
 
 plot_pyr_bike = ggarrange(pyr3, pyr4,  ncol = 1 , nrow = 2, common.legend = TRUE, legend = "bottom",
                           labels = c("FR bike","DEN bike"), hjust = -1)
@@ -568,7 +533,7 @@ plot_pyr_bike = ggarrange(pyr3, pyr4,  ncol = 1 , nrow = 2, common.legend = TRUE
 plot_pyr_walk
 plot_pyr_bike
 ggsave(here("figures","plot_pyr_walk.png"), plot = plot_pyr_walk, width=10, height=9)
-ggsave(here("figures","plot_pyr_bike.png"), plot = plot_pyr_bike, width=10, height=9)
+ggsave(here("figures","plot_pyr_bike.png"), plot = plot_pyr_bike, width=10, height=7)
 
 ############################################################################# Table
 
@@ -584,19 +549,19 @@ aggregate(list("YLL" = ademe_velo_marche$yll_high_corr), list("Scenario" = ademe
 
 # Deaths prevented
 # 2021-2050
-aggregate(list("Nb of premature deaths" = ademe_velo_marche$diff_death), list("Scenario" = ademe_velo_marche$scenario), sum)
-aggregate(list("Nb of premature deaths" = ademe_velo_marche$diff_death_low), list("Scenario" = ademe_velo_marche$scenario), sum)
-aggregate(list("Nb of premature deaths" = ademe_velo_marche$diff_death_high), list("Scenario" = ademe_velo_marche$scenario), sum)
+aggregate(list("Nb of  Deaths" = ademe_velo_marche$diff_death), list("Scenario" = ademe_velo_marche$scenario), sum)
+aggregate(list("Nb of  Deaths" = ademe_velo_marche$diff_death_low), list("Scenario" = ademe_velo_marche$scenario), sum)
+aggregate(list("Nb of  Deaths" = ademe_velo_marche$diff_death_high), list("Scenario" = ademe_velo_marche$scenario), sum)
 
 # 2035
-aggregate(list("Nb of premature deaths" = ademe_velo_marche_no_BAU_age_2035$diff_death), list("Scenario" = ademe_velo_marche_no_BAU_age_2035$scenario), sum)
-aggregate(list("Nb of premature deaths" = ademe_velo_marche_no_BAU_age_2035$diff_death_low), list("Scenario" = ademe_velo_marche_no_BAU_age_2035$scenario), sum)
-aggregate(list("Nb of premature deaths" = ademe_velo_marche_no_BAU_age_2035$diff_death_high), list("Scenario" = ademe_velo_marche_no_BAU_age_2035$scenario), sum)
+aggregate(list("Nb of  Deaths" = ademe_velo_marche_no_BAU_age_2035$diff_death), list("Scenario" = ademe_velo_marche_no_BAU_age_2035$scenario), sum)
+aggregate(list("Nb of  Deaths" = ademe_velo_marche_no_BAU_age_2035$diff_death_low), list("Scenario" = ademe_velo_marche_no_BAU_age_2035$scenario), sum)
+aggregate(list("Nb of  Deaths" = ademe_velo_marche_no_BAU_age_2035$diff_death_high), list("Scenario" = ademe_velo_marche_no_BAU_age_2035$scenario), sum)
 
 # 2050
-aggregate(list("Nb of premature deaths" = ademe_velo_marche_no_BAU_age_2050$diff_death), list("Scenario" = ademe_velo_marche_no_BAU_age_2050$scenario), sum)
-aggregate(list("Nb of premature deaths" = ademe_velo_marche_no_BAU_age_2050$diff_death_low), list("Scenario" = ademe_velo_marche_no_BAU_age_2050$scenario), sum)
-aggregate(list("Nb of premature deaths" = ademe_velo_marche_no_BAU_age_2050$diff_death_high), list("Scenario" = ademe_velo_marche_no_BAU_age_2050$scenario), sum)
+aggregate(list("Nb of  Deaths" = ademe_velo_marche_no_BAU_age_2050$diff_death), list("Scenario" = ademe_velo_marche_no_BAU_age_2050$scenario), sum)
+aggregate(list("Nb of  Deaths" = ademe_velo_marche_no_BAU_age_2050$diff_death_low), list("Scenario" = ademe_velo_marche_no_BAU_age_2050$scenario), sum)
+aggregate(list("Nb of  Deaths" = ademe_velo_marche_no_BAU_age_2050$diff_death_high), list("Scenario" = ademe_velo_marche_no_BAU_age_2050$scenario), sum)
 
 # YLL
 # 2021-2050
