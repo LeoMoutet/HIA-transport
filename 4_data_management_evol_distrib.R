@@ -15,7 +15,7 @@ data_ademe_vae <- read_excel(here("Data brut","data ademe vae.xlsx"))
 projinsee <- readRDS(here("Data brut","Insee_data.drs"))
 distrib_velo_EMP19_par_age <- read.csv(here("Data brut","distri_velo_EMT19_inf50km_jour.csv"))
 distrib_marche_EMP2019 <- read_excel(here("Data brut","distrib_marche_EMP2019.xlsx"))
-monetarisation <- read.csv2(here("Codes kevin","publication_MT","monetarization_yll.csv"), dec=".")
+monetarisation <- read.csv2(here("Data brut","monetarization_yll.csv"), dec=".")
 den <- read.csv(here("Data brut","den.csv"), sep=";")
 
 # Function
