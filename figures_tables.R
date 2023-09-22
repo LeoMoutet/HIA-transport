@@ -151,15 +151,15 @@ min_4 = ademe_all_type_S4 %>%
   xlim (2021,2050)+
   ylim (c(0,100))
 
-plot_des_km_min = ggarrange(km_1,km_2, km_3, km_4,min_1,min_2, min_3, min_4, ncol = 4 , nrow = 2, common.legend = TRUE,
+fig_supp1 = ggarrange(km_1,km_2, km_3, km_4,min_1,min_2, min_3, min_4, ncol = 4 , nrow = 2, common.legend = TRUE,
                             legend = "bottom", align = "v")
-plot_des_km_min
-ggsave(here("figures","plot_des_km_min.pdf"), plot = plot_des_km_min , width = 10, height = 7)
+fig_supp1
+ggsave(here("figures","fig_supp1.pdf"), plot = fig_supp1 , width = 10, height = 7)
 
 
 ################################################## Duration of active travel
 
-min_WHO = ademe_velo_marche_3550_no_0 %>%
+fig_2 = ademe_velo_marche_3550_no_0 %>%
   group_by(year, scenario) %>%
   summarise(mean_min = mean(min_pp_w)) %>%
   ungroup %>%
@@ -179,11 +179,11 @@ min_WHO = ademe_velo_marche_3550_no_0 %>%
   scale_color_manual(breaks = c("BAU", "S1", "S2", "S3", "S4"),
                      values=c("#999999", "#56B4E9", "#CC79A7", "#009E73", "#D55E00"))
 
-min_WHO
-ggsave(here("figures","min_WHO.pdf"), plot = min_WHO, width = 10, height = 7 )
+fig_2
+ggsave(here("figures","fig_2.pdf"), plot = fig_2, width = 10, height = 7 )
 
 
-min_WHO_supp =  ademe_velo_marche_3550_no_0 %>%
+fig_supp2 =  ademe_velo_marche_3550_no_0 %>%
   mutate(age_grp_cont = as.numeric(gsub("-.*", "", age_grp))) %>%
   select(-age) %>% 
   distinct() %>%
@@ -201,8 +201,8 @@ min_WHO_supp =  ademe_velo_marche_3550_no_0 %>%
   scale_colour_viridis_c()+
   labs(color = "Age group")
 
-min_WHO_supp
-ggsave(here("figures","min_WHO_supp.pdf"), plot = min_WHO_supp, width = 10, height = 7 )
+fig_supp2
+ggsave(here("figures","fig_supp2.pdf"), plot = fig_supp2, width = 10, height = 7 )
 
 
 ###########################################################################
@@ -301,12 +301,12 @@ y2 = ademe_velo_marche_no_BAU_age %>%
   xlim ("20-29","30-39","40-49","50-59","60-69","70-79", "80-89")+
   coord_flip()
 
-plot_des = ggarrange(p1,y1,p2,y2, ncol = 2 , nrow = 2, common.legend = TRUE, 
+fig_3 = ggarrange(p1,y1,p2,y2, ncol = 2 , nrow = 2, common.legend = TRUE, 
                      labels = c("A", "B", "C", "D"), hjust = -9,
                      legend = "bottom", align = "v", heights = c(1,1.2))
-plot_des
+fig_3
 
-ggsave(here("figures","plot_des.pdf"), plot = plot_des, width=12, height=8)
+ggsave(here("figures","fig_3.pdf"), plot = fig_3, width=12, height=8)
 
 ####################################################################
 # Type of physical activity
@@ -369,11 +369,11 @@ t8 = ademe_all_type_S4 %>%
   xlim (2021,2050)
 
 
-plot_type2 = ggarrange(t5,t6,t7,t8 , ncol = 2 , nrow = 2, common.legend = TRUE, legend = "bottom", labels = c("A: S1", "B: S2", "C: S3", "D: S4"), hjust = -2.2, vjust = 1.5)
-plot_type2 = annotate_figure(plot_type2, left = text_grob("YLL prevented", size = 20, rot = 90))
-plot_type2
+fig_4 = ggarrange(t5,t6,t7,t8 , ncol = 2 , nrow = 2, common.legend = TRUE, legend = "bottom", labels = c("A: S1", "B: S2", "C: S3", "D: S4"), hjust = -2.2, vjust = 1.5)
+fig_4 = annotate_figure(fig_4, left = text_grob("YLL prevented", size = 20, rot = 90))
+fig_4
 
-ggsave(here("figures","plot_type2.pdf"), plot = plot_type2, width=10, height=7)
+ggsave(here("figures","fig_4.pdf"), plot = fig_4, width=10, height=7)
 
 ###############################################################################
 #   deaths prevented 2035 / 2050
@@ -473,21 +473,13 @@ l2 = ademe_lifexp_no_BAU_age_2050 %>%
   theme_pubr()+
   ylim(c(-0.35,4.6))
 
-plot_des2 = ggarrange(d1.4,d1.5,l1, l2,d1.2,d1.3,  ncol = 2 , nrow = 3, common.legend = TRUE, legend = "bottom",
+fig_5 = ggarrange(d1.4,d1.5,l1, l2,d1.2,d1.3,  ncol = 2 , nrow = 3, common.legend = TRUE, legend = "bottom",
                       labels = c("A: 2035","B: 2050"," C:2035","D: 2050","E: 2035","F: 2050"), hjust = -1.4, align = "v")
 
-plot_des2
+fig_5
 
-ggsave(here("figures","plot_des2.pdf"), plot = plot_des2, width=10, height=9)
+ggsave(here("figures","fig_5.pdf"), plot = fig_5, width=10, height=9)
 
-####################################################################
-
-# Remove
-rm(p1,p2,y1,y2)
-
-rm(d1.2,d1.3,d1.4,d1.5,l1, l2)
-
-rm(t5,t6,t7,t8)
 
 ############################################################################# graph distrib
 pyr1 = distrib_marche_fr %>%
@@ -524,16 +516,16 @@ pyr4 = den_velo %>%
   xlim ("15-19","20-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60-64","65-69","70-74","75-79","80-84","85-89")+
   scale_y_continuous(limits=c(0,1.5))
 
-plot_pyr_walk = ggarrange(pyr1,  ncol = 1 , nrow = 1, common.legend = TRUE, legend = "bottom",
+fig_supp4 = ggarrange(pyr1,  ncol = 1 , nrow = 1, common.legend = TRUE, legend = "bottom",
                           labels = c("FR walk"), hjust = -1)
 
-plot_pyr_bike = ggarrange(pyr3, pyr4,  ncol = 1 , nrow = 2, common.legend = TRUE, legend = "bottom",
+fig_supp3 = ggarrange(pyr3, pyr4,  ncol = 1 , nrow = 2, common.legend = TRUE, legend = "bottom",
                           labels = c("FR bike","DEN bike"), hjust = -1)
 
-plot_pyr_walk
-plot_pyr_bike
-ggsave(here("figures","plot_pyr_walk.pdf"), plot = plot_pyr_walk, width=10, height=9)
-ggsave(here("figures","plot_pyr_bike.pdf"), plot = plot_pyr_bike, width=10, height=7)
+fig_supp4
+fig_supp3
+ggsave(here("figures","fig_supp4.pdf"), plot = fig_supp4, width=10, height=9)
+ggsave(here("figures","fig_supp3.pdf"), plot = fig_supp3, width=10, height=7)
 
 ############################################################################# Table
 
