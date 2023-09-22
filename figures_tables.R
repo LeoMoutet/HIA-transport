@@ -154,7 +154,7 @@ min_4 = ademe_all_type_S4 %>%
 plot_des_km_min = ggarrange(km_1,km_2, km_3, km_4,min_1,min_2, min_3, min_4, ncol = 4 , nrow = 2, common.legend = TRUE,
                             legend = "bottom", align = "v")
 plot_des_km_min
-ggsave(here("figures","plot_des_km_min.png"), plot = plot_des_km_min , width = 10, height = 7)
+ggsave(here("figures","plot_des_km_min.pdf"), plot = plot_des_km_min , width = 10, height = 7)
 
 
 ################################################## Duration of active travel
@@ -180,7 +180,7 @@ min_WHO = ademe_velo_marche_3550_no_0 %>%
                      values=c("#999999", "#56B4E9", "#CC79A7", "#009E73", "#D55E00"))
 
 min_WHO
-ggsave(here("figures","min_WHO.png"), plot = min_WHO, width = 10, height = 7 )
+ggsave(here("figures","min_WHO.pdf"), plot = min_WHO, width = 10, height = 7 )
 
 
 min_WHO_supp =  ademe_velo_marche_3550_no_0 %>%
@@ -202,7 +202,7 @@ min_WHO_supp =  ademe_velo_marche_3550_no_0 %>%
   labs(color = "Age group")
 
 min_WHO_supp
-ggsave(here("figures","min_WHO_supp.png"), plot = min_WHO_supp, width = 10, height = 7 )
+ggsave(here("figures","min_WHO_supp.pdf"), plot = min_WHO_supp, width = 10, height = 7 )
 
 
 ###########################################################################
@@ -306,7 +306,7 @@ plot_des = ggarrange(p1,y1,p2,y2, ncol = 2 , nrow = 2, common.legend = TRUE,
                      legend = "bottom", align = "v", heights = c(1,1.2))
 plot_des
 
-ggsave(here("figures","plot_des.png"), plot = plot_des, width=12, height=8)
+ggsave(here("figures","plot_des.pdf"), plot = plot_des, width=12, height=8)
 
 ####################################################################
 # Type of physical activity
@@ -373,7 +373,7 @@ plot_type2 = ggarrange(t5,t6,t7,t8 , ncol = 2 , nrow = 2, common.legend = TRUE, 
 plot_type2 = annotate_figure(plot_type2, left = text_grob("YLL prevented", size = 20, rot = 90))
 plot_type2
 
-ggsave(here("figures","plot_type2.png"), plot = plot_type2, width=10, height=7)
+ggsave(here("figures","plot_type2.pdf"), plot = plot_type2, width=10, height=7)
 
 ###############################################################################
 #   deaths prevented 2035 / 2050
@@ -478,7 +478,7 @@ plot_des2 = ggarrange(d1.4,d1.5,l1, l2,d1.2,d1.3,  ncol = 2 , nrow = 3, common.l
 
 plot_des2
 
-ggsave(here("figures","plot_des2.png"), plot = plot_des2, width=10, height=9)
+ggsave(here("figures","plot_des2.pdf"), plot = plot_des2, width=10, height=9)
 
 ####################################################################
 
@@ -532,8 +532,8 @@ plot_pyr_bike = ggarrange(pyr3, pyr4,  ncol = 1 , nrow = 2, common.legend = TRUE
 
 plot_pyr_walk
 plot_pyr_bike
-ggsave(here("figures","plot_pyr_walk.png"), plot = plot_pyr_walk, width=10, height=9)
-ggsave(here("figures","plot_pyr_bike.png"), plot = plot_pyr_bike, width=10, height=7)
+ggsave(here("figures","plot_pyr_walk.pdf"), plot = plot_pyr_walk, width=10, height=9)
+ggsave(here("figures","plot_pyr_bike.pdf"), plot = plot_pyr_bike, width=10, height=7)
 
 ############################################################################# Table
 

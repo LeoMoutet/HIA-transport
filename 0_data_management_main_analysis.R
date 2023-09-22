@@ -562,4 +562,11 @@ ademe_all_type$min_pp_w <- ademe_all_type$min_pp_w + ademe_velo_km$min_pp_w + ad
 ademe_velo_marche_3550_no_0 <- ademe_all_type %>% 
   filter(year == "2035" | year == "2050", min_pp_w > 0) 
 
+# Denmark cycling pyramid
+den_velo <- den %>%
+  filter(type == "cycle") %>%
+  mutate (age_grp = age_grp(age)) %>%
+  select(age_grp, rho)%>%
+  distinct()
+
 ###
