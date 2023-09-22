@@ -599,3 +599,107 @@ aggregate(list("costs avoided" = ademe_velo_marche_no_BAU_age_2035$cout_high), l
 aggregate(list("costs avoided" = ademe_velo_marche_no_BAU_age_2050$cout), list("Scenario" = ademe_velo_marche_no_BAU_age_2050$scenario), sum)
 aggregate(list("costs avoided" = ademe_velo_marche_no_BAU_age_2050$cout_low), list("Scenario" = ademe_velo_marche_no_BAU_age_2050$scenario), sum)
 aggregate(list("costs avoided" = ademe_velo_marche_no_BAU_age_2050$cout_high), list("Scenario" = ademe_velo_marche_no_BAU_age_2050$scenario), sum)
+
+
+# Figure S5 - sensitivity analyse fourth
+source(here("4_data_management_evol_distrib.R"))
+
+#   death prevented 
+p1= ademe_velo_marche_no_BAU_age %>%
+  group_by(year, scenario) %>%
+  summarise(sum_diff_death = sum(diff_death),
+            sum_diff_death_low = sum(diff_death_low),
+            sum_diff_death_high = sum(diff_death_high)) %>%
+  ggplot(aes(x=year, y = sum_diff_death, fill = scenario, color = scenario)) +
+  geom_line( size = 1.2) + 
+  geom_ribbon(aes(ymin = sum_diff_death_low, ymax = sum_diff_death_high), alpha = 0.1 , linetype ="dotted" )+
+  scale_y_continuous(name = "Deaths prevented",labels = scales::comma)  +
+  theme_pubr() +
+  xlab("Year") +
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        text = element_text(size = 15),
+        axis.text.x = element_text(hjust=0.5))+
+  scale_fill_manual(values=c("#56B4E9", "#CC79A7", "#009E73", "#D55E00", "#999999")) +
+  scale_color_manual(values=c("#56B4E9", "#CC79A7", "#009E73", "#D55E00", "#999999")) +
+  geom_hline(aes(yintercept = 0), color= "black", linetype = "solid")+
+  xlim (2021,2050)
+
+#   death prevented in thousand
+ademe_velo_marche_no_BAU_age$diff_death_mil <- ademe_velo_marche_no_BAU_age$diff_death /1000
+ademe_velo_marche_no_BAU_age$diff_death_low_mil <- ademe_velo_marche_no_BAU_age$diff_death_low /1000
+ademe_velo_marche_no_BAU_age$diff_death_high_mil <- ademe_velo_marche_no_BAU_age$diff_death_high /1000
+
+p2= ademe_velo_marche_no_BAU_age %>%
+  group_by(age_grp_10, scenario) %>%
+  summarise(sum_diff_death = sum(diff_death_mil),
+            sum_diff_death_low = sum(diff_death_low_mil),
+            sum_diff_death_high = sum(diff_death_high_mil)) %>%
+  ungroup %>%
+  mutate(scenario = factor(scenario, levels = rev(unique(scenario)))) %>%
+  ggplot(aes(x=age_grp_10, y = sum_diff_death, fill = scenario)) +
+  geom_bar(position = position_dodge(), stat = "identity", width=0.8) + 
+  geom_errorbar(aes(ymin = sum_diff_death_low, ymax = sum_diff_death_high ), width = 0.5, position = position_dodge(0.8))+
+  theme_pubr() +
+  xlab("Age group") +
+  ylab("Deaths prevented (thousand)")+
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        text = element_text(size = 15),
+        axis.text.x = element_text(hjust=0.5))+
+  scale_fill_manual(values=c("#56B4E9", "#CC79A7", "#009E73", "#D55E00"), breaks = c("S1","S2","S3","S4")) +
+  geom_hline(aes(yintercept = 0), color= "black")+
+  xlim ("20-29","30-39","40-49","50-59","60-69","70-79", "80-89")+
+  coord_flip()
+
+
+# YLL
+y1 = ademe_velo_marche_no_BAU_age %>%
+  group_by(year, scenario) %>%
+  summarise(sum_yll = sum(yll_corr),
+            sum_yll_low = sum(yll_low_corr),
+            sum_yll_high = sum(yll_high_corr)) %>%
+  ggplot(aes(x=year, y = sum_yll, fill = scenario, color = scenario)) +
+  geom_line( size = 1.2) + 
+  geom_ribbon(aes(ymin = sum_yll_low, ymax = sum_yll_high), alpha = 0.1 , linetype ="dotted")+
+  scale_y_continuous(name = "YLL prevented" ,labels = scales::comma)  +
+  theme_pubr() +
+  xlab("Year") +
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        text = element_text(size = 15),
+        axis.text.x = element_text(hjust=0.5))+
+  scale_fill_manual(values=c("#56B4E9", "#CC79A7", "#009E73", "#D55E00", "#999999")) +
+  scale_color_manual(values=c("#56B4E9", "#CC79A7", "#009E73", "#D55E00", "#999999")) +
+  geom_hline(aes(yintercept = 0), color= "black", linetype = "solid")+
+  xlim (2021,2050)
+
+
+y2 = ademe_velo_marche_no_BAU_age %>%
+  group_by(age_grp_10, scenario) %>%
+  summarise(sum_yll = sum(yll_mil),
+            sum_yll_low = sum(yll_low_mil),
+            sum_yll_high = sum(yll_high_mil)) %>%
+  ungroup %>%
+  mutate(scenario = factor(scenario, levels = rev(unique(scenario)))) %>%
+  ggplot(aes(x=age_grp_10, y = sum_yll, fill = scenario)) +
+  geom_bar(position = position_dodge(), stat = "identity", width=0.8) + 
+  geom_errorbar(aes(ymin = sum_yll_low, ymax = sum_yll_high ), width = 0.5, position = position_dodge(0.8))+
+  theme_pubr() +
+  xlab("Age group") +
+  scale_y_continuous(name = "YLL prevented (thousand)" ,labels = scales::comma)  +
+  theme(legend.position = "bottom",
+        legend.title = element_blank(),
+        text = element_text(size = 15),
+        axis.text.x = element_text(hjust=0.8))+
+  scale_fill_manual(values=c("#56B4E9", "#CC79A7", "#009E73", "#D55E00"), breaks = c("S1","S2","S3","S4")) +
+  geom_hline(aes(yintercept = 0), color= "black")+
+  xlim ("20-29","30-39","40-49","50-59","60-69","70-79", "80-89")+
+  coord_flip()
+
+fig_supp5 = ggarrange(p1,y1,p2,y2, ncol = 2 , nrow = 2, common.legend = TRUE, 
+                  labels = c("A", "B", "C", "D"), hjust = -9,
+                  legend = "bottom", align = "v", heights = c(1,1.2))
+fig_supp5
+
+ggsave(here("figures","fig_supp5.pdf"), plot = fig_supp5, width=12, height=8)
