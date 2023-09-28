@@ -156,7 +156,6 @@ fig_supp1 = ggarrange(km_1,km_2, km_3, km_4,min_1,min_2, min_3, min_4, ncol = 4 
 fig_supp1
 ggsave(here("figures","fig_supp1.pdf"), plot = fig_supp1 , width = 10, height = 7)
 
-
 ################################################## Duration of active travel
 
 fig_2 = ademe_velo_marche_3550_no_0 %>%
