@@ -51,9 +51,8 @@ Cycle_MET = 6.8
 ratio_eCycle_MET = 0.78 # Berntsen, 2017 : 8.5/10.9 ; or Bouscasse 4.5/5.8
 
 RR_ecycle = 1-((1-RR_cycle)*ratio_eCycle_MET)
-RR_ecycle_low = RR_cycle_low
-RR_ecycle_high = RR_cycle_high
-
+RR_ecycle_low = 1-((1-RR_cycle_low)*ratio_eCycle_MET)
+RR_ecycle_high = 1-((1-RR_cycle_high)*ratio_eCycle_MET)
 Ref_velo = 100
 Ref_marche = 168
 
