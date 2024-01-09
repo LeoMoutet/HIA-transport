@@ -48,7 +48,7 @@ RR_walk_high = 0.83
 Walk_MET = 4
 Cycle_MET = 6.8
 
-ratio_eCycle_MET = 0.9 # Bouscasse & al : 4.5/5.8
+ratio_eCycle_MET = 0.89
 
 RR_ecycle = 1-((1-RR_cycle)*ratio_eCycle_MET)
 RR_ecycle_low = 1-((1-RR_cycle_low)*ratio_eCycle_MET)

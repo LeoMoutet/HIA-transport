@@ -1,3 +1,5 @@
+library(gtsummary)
+
 # Fonctions
 source(here("functions.R"))
 
@@ -536,6 +538,7 @@ ggsave(here("figures","plot_pyr_walk.png"), plot = plot_pyr_walk, width=10, heig
 ggsave(here("figures","plot_pyr_bike.png"), plot = plot_pyr_bike, width=10, height=7)
 
 ############################################################################# Table
+
 
 # Main text
 # YLL
