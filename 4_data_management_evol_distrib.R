@@ -630,3 +630,14 @@ ademe_all_type$min_pp_w <- ademe_all_type$min_pp_w + ademe_velo_km$min_pp_w + ad
 # Get only years 2035 and 2050 
 ademe_velo_marche_3550_no_0 <- ademe_all_type %>% 
   filter(year == "2035" | year == "2050", min_pp_w > 0) 
+
+
+plot_review = ademe_velo_km %>%
+  filter(scenario == "S1" & age > 20 & age < 85) %>%
+  group_by(age_grp, year) %>%
+  summarise(rho = mean(rho)) %>%
+  ggplot(aes(x=year, y= rho, color = age_grp))+
+  geom_line(linewidth = 2)+
+  theme_pubr()
+
+ggsave(here("figures","plot_review.png"), plot = plot_review, width=12, height=8)
