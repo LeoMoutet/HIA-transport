@@ -171,7 +171,7 @@ Figure_1 = ademe_velo_marche_3550_no_0 %>%
   geom_point( aes(x=scenario, y=mean_min, color=scenario), size=3 ) +
   coord_flip()+
   xlab("") +
-  ylab("Duration of active travel (min/pp/w)") +
+  ylab("Duration of physical activity (min/pp/w)") +
   facet_wrap(~year, ncol=1) +
   theme_pubr() +
   geom_hline(aes(yintercept = mean_min_2015, linetype ="France 2015"), color= "black", linewidth = 1)+
