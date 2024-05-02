@@ -153,15 +153,15 @@ min_4 = ademe_all_type_S4 %>%
   xlim (2021,2050)+
   ylim (c(0,100))
 
-Figure_S1 = ggarrange(km_1,km_2, km_3, km_4,min_1,min_2, min_3, min_4, ncol = 4 , nrow = 2, common.legend = TRUE,
+Figure_S2 = ggarrange(km_1,km_2, km_3, km_4,min_1,min_2, min_3, min_4, ncol = 4 , nrow = 2, common.legend = TRUE,
                             legend = "bottom", align = "v")
-Figure_S1
-ggsave(here("figures","Figure_S1.png"), plot = Figure_S1 , width = 10, height = 7)
+Figure_S2
+ggsave(here("figures","Figure_S2.png"), plot = Figure_S2 , width = 10, height = 7)
 
 
 ################################################## Duration of active travel
 
-Figure_2 = ademe_velo_marche_3550_no_0 %>%
+Figure_1 = ademe_velo_marche_3550_no_0 %>%
   group_by(year, scenario) %>%
   summarise(mean_min = mean(min_pp_w)) %>%
   ungroup %>%
@@ -181,11 +181,11 @@ Figure_2 = ademe_velo_marche_3550_no_0 %>%
   scale_color_manual(breaks = c("BAU", "S1", "S2", "S3", "S4"),
                      values=c("#999999", "#56B4E9", "#CC79A7", "#009E73", "#D55E00"))
 
-Figure_2
-ggsave(here("figures","Figure_2.png"), plot = Figure_2, width = 10, height = 7 )
+Figure_1
+ggsave(here("figures","Figure_1.png"), plot = Figure_1, width = 10, height = 7 )
 
 
-Figure_S2 =  ademe_velo_marche_3550_no_0 %>%
+Figure_S3 =  ademe_velo_marche_3550_no_0 %>%
   mutate(age_grp_cont = as.numeric(gsub("-.*", "", age_grp))) %>%
   select(-age) %>% 
   distinct() %>%
@@ -203,8 +203,8 @@ Figure_S2 =  ademe_velo_marche_3550_no_0 %>%
   scale_colour_viridis_c()+
   labs(color = "Age group")
 
-Figure_S2
-ggsave(here("figures","Figure_S2.png"), plot = Figure_S2, width = 10, height = 7 )
+Figure_S3
+ggsave(here("figures","Figure_S3.png"), plot = Figure_S3, width = 10, height = 7 )
 
 
 ###########################################################################
@@ -303,12 +303,12 @@ y2 = ademe_velo_marche_no_BAU_age %>%
   xlim ("20-29","30-39","40-49","50-59","60-69","70-79", "80-89")+
   coord_flip()
 
-Figure_3 = ggarrange(p1,y1,p2,y2, ncol = 2 , nrow = 2, common.legend = TRUE, 
+Figure_2 = ggarrange(p1,y1,p2,y2, ncol = 2 , nrow = 2, common.legend = TRUE, 
                      labels = c("A", "B", "C", "D"), hjust = -9,
                      legend = "bottom", align = "v", heights = c(1,1.2))
-Figure_3
+Figure_2
 
-ggsave(here("figures","Figure_3.png"), plot = Figure_3, width=12, height=8)
+ggsave(here("figures","Figure_2.png"), plot = Figure_2, width=12, height=8)
 
 ####################################################################
 # Type of physical activity
@@ -372,10 +372,10 @@ t8 = ademe_all_type_S4 %>%
 
 
 plot_type2 = ggarrange(t5,t6,t7,t8 , ncol = 2 , nrow = 2, common.legend = TRUE, legend = "bottom", labels = c("A: S1", "B: S2", "C: S3", "D: S4"), hjust = -2.2, vjust = 1.5)
-Figure_4 = annotate_figure(plot_type2, left = text_grob("YLL prevented", size = 20, rot = 90))
-Figure_4
+Figure_3 = annotate_figure(plot_type2, left = text_grob("YLL prevented", size = 20, rot = 90))
+Figure_3
 
-ggsave(here("figures","Figure_4.png"), plot = Figure_4, width=10, height=7)
+ggsave(here("figures","Figure_3.png"), plot = Figure_3, width=10, height=7)
 
 ###############################################################################
 #   deaths prevented 2035 / 2050
@@ -475,12 +475,12 @@ l2 = ademe_lifexp_no_BAU_age_2050 %>%
   theme_pubr()+
   ylim(c(-0.35,4.6))
 
-Figure_5 = ggarrange(d1.4,d1.5,l1, l2,d1.2,d1.3,  ncol = 2 , nrow = 3, common.legend = TRUE, legend = "bottom",
+Figure_4 = ggarrange(d1.4,d1.5,l1, l2,d1.2,d1.3,  ncol = 2 , nrow = 3, common.legend = TRUE, legend = "bottom",
                       labels = c("A: 2035","B: 2050"," C:2035","D: 2050","E: 2035","F: 2050"), hjust = -1.4, align = "v")
 
-Figure_5
+Figure_4
 
-ggsave(here("figures","Figure_5.png"), plot = Figure_5, width=10, height=9)
+ggsave(here("figures","Figure_4.png"), plot = Figure_4, width=10, height=9)
 
 ####################################################################
 
@@ -528,16 +528,16 @@ pyr4 = den_velo %>%
 
 
 
-Figure_S3 = ggarrange(pyr3, pyr4,  ncol = 1 , nrow = 2, common.legend = TRUE, legend = "bottom",
+Figure_S4 = ggarrange(pyr3, pyr4,  ncol = 1 , nrow = 2, common.legend = TRUE, legend = "bottom",
                           labels = c("FR bike","DEN bike"), hjust = -1)
 
-Figure_S4 = ggarrange(pyr1,  ncol = 1 , nrow = 1, common.legend = TRUE, legend = "bottom",
+Figure_S5 = ggarrange(pyr1,  ncol = 1 , nrow = 1, common.legend = TRUE, legend = "bottom",
                           labels = c("FR walk"), hjust = -1)
 
-Figure_S3
 Figure_S4
-ggsave(here("figures","Figure_S3.png"), plot = Figure_S3, width=10, height=7)
-ggsave(here("figures","Figure_S4.png"), plot = Figure_S4, width=10, height=9)
+Figure_S5
+ggsave(here("figures","Figure_S4.png"), plot = Figure_S4, width=10, height=7)
+ggsave(here("figures","Figure_S5.png"), plot = Figure_S5, width=10, height=9)
 
 ############################################################################# Table
 
