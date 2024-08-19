@@ -1,6 +1,6 @@
 *Article: Different pathways toward net-zero emissions imply diverging health impacts: a health impact assessment study for France*
 
-DOI: https://www.medrxiv.org/content/10.1101/2023.10.03.23296478v2
+DOI: https://iopscience.iop.org/article/10.1088/2752-5309/ad5750
 
 
 FILES:
